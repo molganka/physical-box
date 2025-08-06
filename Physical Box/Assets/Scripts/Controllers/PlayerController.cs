@@ -57,7 +57,12 @@ public class PlayerController : MonoBehaviour
 
         _currentMovement = new Vector3(_smoothMove.x, _velocity, _smoothMove.z);
 
-        _characterController.Move(_currentMovement * Time.deltaTime);
+        CollisionFlags flags = _characterController.Move(_currentMovement * Time.deltaTime);
+        //если сверху было касание то нужно начать падать
+        if ((flags & CollisionFlags.Above) > 0 && _velocity > 0)
+        {
+            _velocity = 0;
+        }
     }
 
     private void HandleRotation()
