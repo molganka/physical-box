@@ -3,22 +3,38 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Transform _cameraTransform;
+
+    [Header("Speed")]
     [SerializeField] private float _basicSpeedMove;
     [SerializeField] private float _sprintSpeedMove;
+
+    [Header("Rotation")]
     [SerializeField] private float _horizontalMultiplier;
     [SerializeField] private float _verticalMultiplier;
     [SerializeField] private float _sensitivity;
     [SerializeField] private float _verticalRotationRange = 80f;
-    [SerializeField] private float _moveSmooth;
+    
+    [Header("Move")]
+    [SerializeField] private float _moveSmoothValue;
+
+    [Header("Jump")]
+    [SerializeField] private float _gravity;
+    [SerializeField] private float _jumpHeight;
 
     private float _currentSpeedMove;
+
     private float _horizontalRotation;
     private float _verticalRotation;
+    private float _velocity;
+    private Vector3 _smoothMove;
+    private Vector3 _currentMovement;
 
-    private Vector3 _currentMoveDirection;
+    private CharacterController _characterController;
 
     private void Start()
     {
+        _characterController = GetComponent<CharacterController>();
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;        
     }
@@ -27,16 +43,21 @@ public class PlayerController : MonoBehaviour
     {
         HandleRotation();
         HandleMovement();
-        ControlSpeed();
+        GravityAndJump();
     }
 
     private void HandleMovement()
     {
+        ControlSpeed();       
         Vector2 inputVector = InputManager.Instance.PlayerMoveInput;
         Vector3 moveDirection = new Vector3(inputVector.x, 0, inputVector.y);
-        moveDirection = Vector3.Lerp(_currentMoveDirection, moveDirection, _moveSmooth * Time.deltaTime);
-        _currentMoveDirection = moveDirection;
-        transform.Translate(moveDirection * _currentSpeedMove * Time.deltaTime);
+        moveDirection = transform.rotation * moveDirection * _currentSpeedMove;
+
+        _smoothMove = Vector3.Lerp(_smoothMove, moveDirection, _moveSmoothValue * Time.deltaTime);
+
+        _currentMovement = new Vector3(_smoothMove.x, _velocity, _smoothMove.z);
+
+        _characterController.Move(_currentMovement * Time.deltaTime);
     }
 
     private void HandleRotation()
@@ -65,6 +86,16 @@ public class PlayerController : MonoBehaviour
         else
         {
             _currentSpeedMove = _basicSpeedMove;
+        }
+    }
+
+    private void GravityAndJump()
+    {
+        _velocity += _gravity * Time.deltaTime;
+
+        if (InputManager.Instance.PlayerIsJumpInput && _characterController.isGrounded)
+        {
+            _velocity = Mathf.Sqrt(_jumpHeight * -2.0f * _gravity);
         }
     }
 }

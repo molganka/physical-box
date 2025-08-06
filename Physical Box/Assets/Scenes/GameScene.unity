@@ -209,8 +209,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 1000
-  field of view: 75
+  far clip plane: 100
+  field of view: 80
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -237,7 +237,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -745,8 +745,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1191065894}
-  - component: {fileID: 1191065895}
   - component: {fileID: 1191065896}
+  - component: {fileID: 1191065895}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -763,7 +763,7 @@ Transform:
   m_GameObject: {fileID: 1191065893}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.84, z: 0}
+  m_LocalPosition: {x: 0, y: 6.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -789,7 +789,9 @@ MonoBehaviour:
   _verticalMultiplier: 0.02
   _sensitivity: 10
   _verticalRotationRange: 80
-  _moveSmooth: 15
+  _moveSmoothValue: 13
+  _gravity: -35
+  _jumpHeight: 2.3
 --- !u!143 &1191065896
 CharacterController:
   m_ObjectHideFlags: 0

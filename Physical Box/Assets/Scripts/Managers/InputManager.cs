@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class InputManager : MonoBehaviour
     public Vector2 PlayerMoveInput { get; private set; }
     public Vector2 PlayerLookInput { get; private set; }
     public bool PlayerIsSprintInput { get; private set; }
+    public bool PlayerIsJumpInput { get; private set; }
 
     private void Awake()
     {
@@ -40,6 +42,9 @@ public class InputManager : MonoBehaviour
 
         _inputSystem.Player.Sprint.performed += _ => PlayerIsSprintInput = true;
         _inputSystem.Player.Sprint.canceled += _ => PlayerIsSprintInput = false;
+
+        _inputSystem.Player.Jump.performed += _ => PlayerIsJumpInput = true;
+        _inputSystem.Player.Jump.canceled += _ => PlayerIsJumpInput = false;
     }
 }
 
