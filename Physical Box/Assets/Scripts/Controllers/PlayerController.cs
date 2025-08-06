@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private Transform _cameraTransform;
-
     [Header("Speed")]
     [SerializeField] private float _basicSpeedMove;
     [SerializeField] private float _sprintSpeedMove;
+    [SerializeField] private float _crouchSpeedMove;
 
     [Header("Rotation")]
     [SerializeField] private float _horizontalMultiplier;
@@ -29,21 +28,42 @@ public class PlayerController : MonoBehaviour
     private Vector3 _smoothMove;
     private Vector3 _currentMovement;
 
+    private bool _isMoving;
+    private bool _isSprinting;
+    private bool _isCrouching;   
+
     private CharacterController _characterController;
+    private PlayerCameraController _camera;
+
+    private void OnEnable()
+    {
+        InputManager.Instance.OnPlayerCrouchInput += ChangeBodyPosition;
+    }
+
+    private void OnDisable()
+    {
+        InputManager.Instance.OnPlayerCrouchInput -= ChangeBodyPosition;
+    }
 
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
+        _camera = GetComponentInChildren<PlayerCameraController>();
 
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;        
+        Cursor.visible = false;
+
+        SetCrouchPosition(false);
     }
 
     private void Update()
     {
+        UpdateSprintState();
         HandleRotation();
         HandleMovement();
         GravityAndJump();
+        ControlSpeed();
+        ControlFOV();
     }
 
     private void HandleMovement()
@@ -54,15 +74,20 @@ public class PlayerController : MonoBehaviour
         moveDirection = transform.rotation * moveDirection * _currentSpeedMove;
 
         _smoothMove = Vector3.Lerp(_smoothMove, moveDirection, _moveSmoothValue * Time.deltaTime);
-
         _currentMovement = new Vector3(_smoothMove.x, _velocity, _smoothMove.z);
-
         CollisionFlags flags = _characterController.Move(_currentMovement * Time.deltaTime);
+
         //если сверху было касание то нужно начать падать
         if ((flags & CollisionFlags.Above) > 0 && _velocity > 0)
         {
             _velocity = 0;
         }
+
+        //записываем было ли движение (ось Y не считается)
+        if (moveDirection != Vector3.zero)
+            _isMoving = true;
+        else
+            _isMoving = false;
     }
 
     private void HandleRotation()
@@ -79,12 +104,16 @@ public class PlayerController : MonoBehaviour
 
         // Применяем вращение 
         transform.localRotation = Quaternion.Euler(0, _horizontalRotation, 0);
-        _cameraTransform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
+        _camera.ChangeRotation(Quaternion.Euler(_verticalRotation, 0f, 0f));
     }
 
     private void ControlSpeed()
     {
-        if (InputManager.Instance.PlayerIsSprintInput)
+        if(_isCrouching)
+        {
+            _currentSpeedMove = _crouchSpeedMove;
+        }
+        else if (_isSprinting)
         {
             _currentSpeedMove = _sprintSpeedMove;
         }
@@ -94,13 +123,70 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void ControlFOV()
+    {
+        //если мы движемся и бежим то увеличивать fov
+        if (_isMoving && _isSprinting)
+            _camera.SetHighFOV();
+        else
+            _camera.SetBasicFOV();
+    }
+
+    private void UpdateSprintState()
+    {
+        if (InputManager.Instance.PlayerIsSprintInput && !_isCrouching)
+            _isSprinting = true;
+        else
+            _isSprinting = false;
+    }
+
     private void GravityAndJump()
     {
-        _velocity += _gravity * Time.deltaTime;
+        if (_characterController.isGrounded)
+            _velocity = 0;
+        else
+            _velocity += _gravity * Time.deltaTime;
 
-        if (InputManager.Instance.PlayerIsJumpInput && _characterController.isGrounded)
+        if (InputManager.Instance.PlayerIsJumpInput && !_isCrouching && _characterController.isGrounded)
         {
             _velocity = Mathf.Sqrt(_jumpHeight * -2.0f * _gravity);
         }
+    }
+
+    [Header("Body Position")]
+    [SerializeField] private float _standBodyHeight;
+    [SerializeField] private float _crouchBodyHeight;
+    [SerializeField] private float _crouchBodyCenterY;
+    [SerializeField] private float _standCameraPositionY;
+    [SerializeField] private float _crouchCameraPositionY;
+    private void ChangeBodyPosition()
+    {
+        SetCrouchPosition(!_isCrouching);
+    }
+
+    private void SetCrouchPosition(bool onCrouch)
+    {
+        if (onCrouch)
+        {
+            _characterController.height = _crouchBodyHeight;
+            _characterController.center = new Vector3(0, _crouchBodyCenterY, 0);
+            _camera.ChangeSmoothYPosition(_crouchCameraPositionY);
+            _isCrouching = true;
+        }
+        else 
+        {
+            if (!CheckStandUp())
+            {
+                _characterController.height = _standBodyHeight;
+                _characterController.center = Vector3.zero;
+                _camera.ChangeSmoothYPosition(_standCameraPositionY);
+                _isCrouching = false;
+            }
+        }
+    }
+
+    private bool CheckStandUp()
+    {
+        return Physics.Raycast(transform.position, Vector3.up, _standBodyHeight / 2);
     }
 }

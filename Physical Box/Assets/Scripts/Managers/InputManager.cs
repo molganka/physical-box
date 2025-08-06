@@ -12,6 +12,8 @@ public class InputManager : MonoBehaviour
     public bool PlayerIsSprintInput { get; private set; }
     public bool PlayerIsJumpInput { get; private set; }
 
+    public event Action OnPlayerCrouchInput;
+
     private void Awake()
     {
         if (Instance == null)
@@ -45,6 +47,8 @@ public class InputManager : MonoBehaviour
 
         _inputSystem.Player.Jump.performed += _ => PlayerIsJumpInput = true;
         _inputSystem.Player.Jump.canceled += _ => PlayerIsJumpInput = false;
+
+        _inputSystem.Player.Crouch.performed += _ => OnPlayerCrouchInput?.Invoke();
     }
 }
 
