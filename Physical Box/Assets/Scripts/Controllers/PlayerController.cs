@@ -1,3 +1,4 @@
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _verticalMultiplier;
     [SerializeField] private float _sensitivity;
     [SerializeField] private float _verticalRotationRange = 80f;
-    
+
     [Header("Move")]
     [SerializeField] private float _moveSmoothValue;
 
@@ -30,7 +31,8 @@ public class PlayerController : MonoBehaviour
 
     private bool _isMoving;
     private bool _isSprinting;
-    private bool _isCrouching;   
+    private bool _isCrouching;
+    private bool _isOnGround;
 
     private CharacterController _characterController;
     private PlayerCameraController _camera;
@@ -58,17 +60,20 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(_isOnGround);
         UpdateSprintState();
+        UpdateGroundState();
         HandleRotation();
         HandleMovement();
-        GravityAndJump();
+        Gravity();
+        CheckJump();
         ControlSpeed();
         ControlFOV();
     }
 
     private void HandleMovement()
     {
-        ControlSpeed();       
+        ControlSpeed();
         Vector2 inputVector = InputManager.Instance.PlayerMoveInput;
         Vector3 moveDirection = new Vector3(inputVector.x, 0, inputVector.y);
         moveDirection = transform.rotation * moveDirection * _currentSpeedMove;
@@ -109,7 +114,7 @@ public class PlayerController : MonoBehaviour
 
     private void ControlSpeed()
     {
-        if(_isCrouching)
+        if (_isCrouching)
         {
             _currentSpeedMove = _crouchSpeedMove;
         }
@@ -140,14 +145,22 @@ public class PlayerController : MonoBehaviour
             _isSprinting = false;
     }
 
-    private void GravityAndJump()
+    private void UpdateGroundState()
     {
-        if (_characterController.isGrounded)
-            _velocity = 0;
+        _isOnGround = _characterController.isGrounded; 
+    }
+
+    private void Gravity()
+    {
+        if (_isOnGround)
+            _velocity = _gravity * 0.01f;
         else
             _velocity += _gravity * Time.deltaTime;
+    }
 
-        if (InputManager.Instance.PlayerIsJumpInput && !_isCrouching && _characterController.isGrounded)
+    private void CheckJump()
+    {
+        if (InputManager.Instance.PlayerIsJumpInput && !_isCrouching && _isOnGround)
         {
             _velocity = Mathf.Sqrt(_jumpHeight * -2.0f * _gravity);
         }
@@ -166,6 +179,8 @@ public class PlayerController : MonoBehaviour
 
     private void SetCrouchPosition(bool onCrouch)
     {
+        if (!_isOnGround) return;
+
         if (onCrouch)
         {
             _characterController.height = _crouchBodyHeight;
@@ -173,7 +188,7 @@ public class PlayerController : MonoBehaviour
             _camera.ChangeSmoothYPosition(_crouchCameraPositionY);
             _isCrouching = true;
         }
-        else 
+        else
         {
             if (!CheckStandUp())
             {
