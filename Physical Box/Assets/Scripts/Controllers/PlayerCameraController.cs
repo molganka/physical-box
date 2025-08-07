@@ -1,5 +1,4 @@
 using UnityEngine;
-using DG.Tweening;
 
 public class PlayerCameraController : MonoBehaviour
 {
@@ -14,6 +13,7 @@ public class PlayerCameraController : MonoBehaviour
     private void Awake()
     {
         _camera = GetComponent<Camera>();
+        _targetLocalPosition = transform.localPosition;
     }
 
     private void LateUpdate()
