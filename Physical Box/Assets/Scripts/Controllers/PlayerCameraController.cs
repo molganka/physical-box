@@ -22,15 +22,22 @@ public class PlayerCameraController : MonoBehaviour
         _camera = GetComponentInChildren<Camera>();
         _playerController = GetComponentInParent<PlayerController>();
         _animator = GetComponentInChildren<Animator>();
-        _targetLocalPosition = transform.localPosition;       
+        _targetLocalPosition = transform.localPosition;
     }
 
     private void Update()
     {
-        if (_playerController.IsMoving)
-            _animator.SetBool("IsWalking", true);
+        if (_playerController.IsOnGround)
+        {
+            _animator.SetBool("IsOnGround", true);
+            _animator.SetBool("IsRunning", _playerController.IsRunning);
+            _animator.SetBool("IsWalking", _playerController.IsMoving);
+            _animator.SetBool("IsCrouching", _playerController.IsCrouching);
+        }
         else
-            _animator.SetBool("IsWalking", false);
+        {
+            _animator.SetBool("IsOnGround", false);
+        }
     }
 
     private void LateUpdate()

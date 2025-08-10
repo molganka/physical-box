@@ -4,7 +4,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Speed")]
     [SerializeField] private float _basicSpeedMove;
-    [SerializeField] private float _sprintSpeedMove;
+    [SerializeField] private float _runSpeedMove;
     [SerializeField] private float _crouchSpeedMove;
     [SerializeField] private float _speedMoveSmoothValue;
 
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _currentMovement;
 
     private bool _isMoving;
-    private bool _isSprinting;
+    private bool _isRunning;
     private bool _isCrouching;
     private bool _isOnGround;
 
@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour
     private PlayerCameraController _camera;
 
     public bool IsMoving { get { return _isMoving; } }
+    public bool IsRunning { get { return _isRunning; } }
+    public bool IsCrouching { get { return _isCrouching; } }
+    public bool IsOnGround { get { return _isOnGround; } }
 
     private void OnEnable()
     {
@@ -79,6 +82,7 @@ public class PlayerController : MonoBehaviour
         Vector2 inputVector = InputManager.Instance.PlayerMoveInput;
         Vector3 moveDirection = new Vector3(inputVector.x, 0, inputVector.y);
         moveDirection = transform.rotation * moveDirection * _currentSpeedMove;
+        
 
         _smoothMove = Vector3.Lerp(_smoothMove, moveDirection, _moveSmoothValue * Time.deltaTime);
         _currentMovement = new Vector3(_smoothMove.x, _velocity, _smoothMove.z);
@@ -120,9 +124,9 @@ public class PlayerController : MonoBehaviour
         {
             _goalSpeedMove = _crouchSpeedMove;
         }
-        else if (_isSprinting)
+        else if (_isRunning)
         {
-            _goalSpeedMove = _sprintSpeedMove;
+            _goalSpeedMove = _runSpeedMove;
         }
         else
         {
@@ -135,7 +139,7 @@ public class PlayerController : MonoBehaviour
     private void ControlFOV()
     {
         //если мы движемся и бежим то увеличивать fov
-        if (_isMoving && _isSprinting)
+        if (_isMoving && _isRunning)
             _camera.SetHighFOV();
         else
             _camera.SetBasicFOV();
@@ -143,10 +147,10 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateSprintState()
     {
-        if (InputManager.Instance.PlayerIsSprintInput && !_isCrouching)
-            _isSprinting = true;
+        if (InputManager.Instance.PlayerIsRunInput && !_isCrouching)
+            _isRunning = true;
         else
-            _isSprinting = false;
+            _isRunning = false;
     }
 
     private void UpdateGroundState()
