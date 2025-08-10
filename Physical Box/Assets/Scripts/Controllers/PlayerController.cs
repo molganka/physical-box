@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _basicSpeedMove;
     [SerializeField] private float _sprintSpeedMove;
     [SerializeField] private float _crouchSpeedMove;
+    [SerializeField] private float _speedMoveSmoothValue;
 
     [Header("Rotation")]
     [SerializeField] private float _horizontalMultiplier;
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _jumpHeight;
 
     private float _currentSpeedMove;
+    private float _goalSpeedMove;
 
     private float _horizontalRotation;
     private float _verticalRotation;
@@ -59,7 +61,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(_isOnGround);
         UpdateSprintState();
         UpdateGroundState();
         HandleRotation();
@@ -115,16 +116,18 @@ public class PlayerController : MonoBehaviour
     {
         if (_isCrouching)
         {
-            _currentSpeedMove = _crouchSpeedMove;
+            _goalSpeedMove = _crouchSpeedMove;
         }
         else if (_isSprinting)
         {
-            _currentSpeedMove = _sprintSpeedMove;
+            _goalSpeedMove = _sprintSpeedMove;
         }
         else
         {
-            _currentSpeedMove = _basicSpeedMove;
+            _goalSpeedMove = _basicSpeedMove;
         }
+
+        _currentSpeedMove = Mathf.Lerp(_currentSpeedMove, _goalSpeedMove, _speedMoveSmoothValue * Time.deltaTime);
     }
 
     private void ControlFOV()

@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
     public bool PlayerIsJumpInput { get; private set; }
 
     public event Action OnPlayerCrouchInput;
+    public event Action<float> OnPlayerScrollDeviceInput;
 
     private void Awake()
     {
@@ -41,6 +42,8 @@ public class InputManager : MonoBehaviour
 
         _inputSystem.Player.Look.performed += ctx => PlayerLookInput = ctx.ReadValue<Vector2>();
         _inputSystem.Player.Look.canceled += _ => PlayerLookInput = Vector2.zero;
+
+        _inputSystem.Player.ScrollDevice.performed += ctx => OnPlayerScrollDeviceInput?.Invoke(ctx.ReadValue<Vector2>().y);
 
         _inputSystem.Player.Sprint.performed += _ => PlayerIsSprintInput = true;
         _inputSystem.Player.Sprint.canceled += _ => PlayerIsSprintInput = false;

@@ -10,12 +10,9 @@ public class DotweenManager : MonoBehaviour
         if(Instance == null)
             Instance = this;
     }
-
-    [Header("Camera")]
-    [SerializeField] private float _FOVDuration;
-    [SerializeField] private Ease _FOVEase;
-    public void ChangeFOV(Camera camera, float FOV)
+   
+    public void ChangeFOV(Camera camera, float FOV, float duration, Ease ease)
     {
-        camera.DOFieldOfView(FOV, _FOVDuration).SetEase(_FOVEase);
+        camera.DOFieldOfView(FOV, duration).SetEase(ease);
     }
 }

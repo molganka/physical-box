@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerCameraController : MonoBehaviour
@@ -9,6 +10,10 @@ public class PlayerCameraController : MonoBehaviour
     private Vector3 _targetLocalPosition;
 
     private Camera _camera;
+
+    [Header("Dotween")]
+    [SerializeField] private float _FOVDuration;
+    [SerializeField] private Ease _FOVEase;
 
     private void Awake()
     {
@@ -33,11 +38,11 @@ public class PlayerCameraController : MonoBehaviour
 
     public void SetHighFOV()
     {
-        DotweenManager.Instance.ChangeFOV(_camera, _highFOV);
+        DotweenManager.Instance.ChangeFOV(_camera, _highFOV, _FOVDuration, _FOVEase);
     }
 
     public void SetBasicFOV()
     {
-        DotweenManager.Instance.ChangeFOV(_camera, _basicFOV);
+        DotweenManager.Instance.ChangeFOV(_camera, _basicFOV, _FOVDuration, _FOVEase);
     }
 }
