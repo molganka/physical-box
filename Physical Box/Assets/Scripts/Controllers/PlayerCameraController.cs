@@ -10,6 +10,8 @@ public class PlayerCameraController : MonoBehaviour
     private Vector3 _targetLocalPosition;
 
     private Camera _camera;
+    private PlayerController _playerController;
+    private Animator _animator;
 
     [Header("Dotween")]
     [SerializeField] private float _FOVDuration;
@@ -17,8 +19,18 @@ public class PlayerCameraController : MonoBehaviour
 
     private void Awake()
     {
-        _camera = GetComponent<Camera>();
-        _targetLocalPosition = transform.localPosition;
+        _camera = GetComponentInChildren<Camera>();
+        _playerController = GetComponentInParent<PlayerController>();
+        _animator = GetComponentInChildren<Animator>();
+        _targetLocalPosition = transform.localPosition;       
+    }
+
+    private void Update()
+    {
+        if (_playerController.IsMoving)
+            _animator.SetBool("IsWalking", true);
+        else
+            _animator.SetBool("IsWalking", false);
     }
 
     private void LateUpdate()
@@ -33,7 +45,7 @@ public class PlayerCameraController : MonoBehaviour
 
     public void ChangeRotation(Quaternion rotation)
     {
-        transform.localRotation = rotation;
+        transform.GetChild(0).localRotation = rotation;
     }
 
     public void SetHighFOV()

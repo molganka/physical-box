@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
     private CharacterController _characterController;
     private PlayerCameraController _camera;
 
+    public bool IsMoving { get { return _isMoving; } }
+
     private void OnEnable()
     {
         InputManager.Instance.OnPlayerCrouchInput += ChangeBodyPosition;
