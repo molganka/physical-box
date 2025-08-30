@@ -266,6 +266,54 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Device"",
+            ""id"": ""42e781a1-2a42-46df-a92a-ad81281ed841"",
+            ""actions"": [
+                {
+                    ""name"": ""LeftMouseInteraction"",
+                    ""type"": ""Button"",
+                    ""id"": ""bde296c6-bfcd-4b36-a2e0-702b157b232b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightMouseInteraction"",
+                    ""type"": ""Button"",
+                    ""id"": ""acb2fec3-782c-4af5-8724-5e108553929a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5b9cfb15-7be6-455f-9bfb-4f4860c76b6e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftMouseInteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""664ea921-417d-4fe4-9413-c851745c8c7e"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightMouseInteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -281,12 +329,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
+        // Device
+        m_Device = asset.FindActionMap("Device", throwIfNotFound: true);
+        m_Device_LeftMouseInteraction = m_Device.FindAction("LeftMouseInteraction", throwIfNotFound: true);
+        m_Device_RightMouseInteraction = m_Device.FindAction("RightMouseInteraction", throwIfNotFound: true);
     }
 
     ~@GameInput()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, GameInput.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, GameInput.UI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Device.enabled, "This will cause a leak and performance issues, GameInput.Device.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -476,6 +529,60 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Device
+    private readonly InputActionMap m_Device;
+    private List<IDeviceActions> m_DeviceActionsCallbackInterfaces = new List<IDeviceActions>();
+    private readonly InputAction m_Device_LeftMouseInteraction;
+    private readonly InputAction m_Device_RightMouseInteraction;
+    public struct DeviceActions
+    {
+        private @GameInput m_Wrapper;
+        public DeviceActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @LeftMouseInteraction => m_Wrapper.m_Device_LeftMouseInteraction;
+        public InputAction @RightMouseInteraction => m_Wrapper.m_Device_RightMouseInteraction;
+        public InputActionMap Get() { return m_Wrapper.m_Device; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DeviceActions set) { return set.Get(); }
+        public void AddCallbacks(IDeviceActions instance)
+        {
+            if (instance == null || m_Wrapper.m_DeviceActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DeviceActionsCallbackInterfaces.Add(instance);
+            @LeftMouseInteraction.started += instance.OnLeftMouseInteraction;
+            @LeftMouseInteraction.performed += instance.OnLeftMouseInteraction;
+            @LeftMouseInteraction.canceled += instance.OnLeftMouseInteraction;
+            @RightMouseInteraction.started += instance.OnRightMouseInteraction;
+            @RightMouseInteraction.performed += instance.OnRightMouseInteraction;
+            @RightMouseInteraction.canceled += instance.OnRightMouseInteraction;
+        }
+
+        private void UnregisterCallbacks(IDeviceActions instance)
+        {
+            @LeftMouseInteraction.started -= instance.OnLeftMouseInteraction;
+            @LeftMouseInteraction.performed -= instance.OnLeftMouseInteraction;
+            @LeftMouseInteraction.canceled -= instance.OnLeftMouseInteraction;
+            @RightMouseInteraction.started -= instance.OnRightMouseInteraction;
+            @RightMouseInteraction.performed -= instance.OnRightMouseInteraction;
+            @RightMouseInteraction.canceled -= instance.OnRightMouseInteraction;
+        }
+
+        public void RemoveCallbacks(IDeviceActions instance)
+        {
+            if (m_Wrapper.m_DeviceActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IDeviceActions instance)
+        {
+            foreach (var item in m_Wrapper.m_DeviceActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_DeviceActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public DeviceActions @Device => new DeviceActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -488,5 +595,10 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     public interface IUIActions
     {
         void OnNewaction(InputAction.CallbackContext context);
+    }
+    public interface IDeviceActions
+    {
+        void OnLeftMouseInteraction(InputAction.CallbackContext context);
+        void OnRightMouseInteraction(InputAction.CallbackContext context);
     }
 }

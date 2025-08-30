@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _gravity;
     [SerializeField] private float _jumpHeight;
 
+    public static PlayerController Instance;
+
     private float _currentSpeedMove;
     private float _goalSpeedMove;
 
@@ -42,6 +44,12 @@ public class PlayerController : MonoBehaviour
     public bool IsRunning { get { return _isRunning; } }
     public bool IsCrouching { get { return _isCrouching; } }
     public bool IsOnGround { get { return _isOnGround; } }
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+    }
 
     private void OnEnable()
     {

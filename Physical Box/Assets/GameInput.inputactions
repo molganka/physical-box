@@ -244,6 +244,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Device",
+            "id": "42e781a1-2a42-46df-a92a-ad81281ed841",
+            "actions": [
+                {
+                    "name": "LeftMouseInteraction",
+                    "type": "Button",
+                    "id": "bde296c6-bfcd-4b36-a2e0-702b157b232b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightMouseInteraction",
+                    "type": "Button",
+                    "id": "acb2fec3-782c-4af5-8724-5e108553929a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5b9cfb15-7be6-455f-9bfb-4f4860c76b6e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftMouseInteraction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "664ea921-417d-4fe4-9413-c851745c8c7e",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightMouseInteraction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

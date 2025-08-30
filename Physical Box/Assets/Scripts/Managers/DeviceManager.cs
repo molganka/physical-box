@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DeviceManager : MonoBehaviour
 {
-    [SerializeField] private Device[] _devices;
+    [SerializeField] private BaseDevice[] _devices;
     private int _currentDeviceIndex;
     private int _mouseScrollCountToChange;
 
@@ -28,12 +28,12 @@ public class DeviceManager : MonoBehaviour
 
     private void InitializeDevices()
     {
-        _devices = new Device[transform.childCount];
+        _devices = new BaseDevice[transform.childCount];
 
         int i = 0;
         foreach (Transform child in transform)
         {
-            if (child.TryGetComponent<Device>(out Device device))
+            if (child.TryGetComponent<BaseDevice>(out BaseDevice device))
             {
                 _devices[i] = device;
                 device.Hide();

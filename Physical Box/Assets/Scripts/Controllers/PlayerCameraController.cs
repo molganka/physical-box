@@ -7,37 +7,26 @@ public class PlayerCameraController : MonoBehaviour
     [SerializeField] private float _basicFOV;
     [SerializeField] private float _highFOV;
 
-    private Vector3 _targetLocalPosition;
-
-    private Camera _camera;
-    private PlayerController _playerController;
-    private Animator _animator;
-
     [Header("Dotween")]
     [SerializeField] private float _FOVDuration;
     [SerializeField] private Ease _FOVEase;
 
+    public static PlayerCameraController Instance;
+
+    private Vector3 _targetLocalPosition;
+
+    private Camera _camera;
+
+    public Transform CameraTransform { get; private set; }
+
     private void Awake()
     {
-        _camera = GetComponentInChildren<Camera>();
-        _playerController = GetComponentInParent<PlayerController>();
-        _animator = GetComponentInChildren<Animator>();
-        _targetLocalPosition = transform.localPosition;
-    }
+        if(Instance == null)
+            Instance = this;
 
-    private void Update()
-    {
-        if (_playerController.IsOnGround)
-        {
-            _animator.SetBool("IsOnGround", true);
-            _animator.SetBool("IsRunning", _playerController.IsRunning);
-            _animator.SetBool("IsWalking", _playerController.IsMoving);
-            _animator.SetBool("IsCrouching", _playerController.IsCrouching);
-        }
-        else
-        {
-            _animator.SetBool("IsOnGround", false);
-        }
+        _camera = GetComponentInChildren<Camera>();
+        _targetLocalPosition = transform.localPosition;
+        CameraTransform = transform.GetChild(0);
     }
 
     private void LateUpdate()
@@ -52,7 +41,7 @@ public class PlayerCameraController : MonoBehaviour
 
     public void ChangeRotation(Quaternion rotation)
     {
-        transform.GetChild(0).localRotation = rotation;
+        CameraTransform.localRotation = rotation;
     }
 
     public void SetHighFOV()

@@ -14,6 +14,8 @@ public class InputManager : MonoBehaviour
 
     public event Action OnPlayerCrouchInput;
     public event Action<float> OnPlayerScrollDeviceInput;
+    public event Action OnDeviceLeftMouseInteraction;
+    public event Action OnDeviceRightMouseInteraction;
 
     private void Awake()
     {
@@ -52,6 +54,9 @@ public class InputManager : MonoBehaviour
         _inputSystem.Player.Jump.canceled += _ => PlayerIsJumpInput = false;
 
         _inputSystem.Player.Crouch.performed += _ => OnPlayerCrouchInput?.Invoke();
+
+        _inputSystem.Device.LeftMouseInteraction.performed += _ => OnDeviceLeftMouseInteraction?.Invoke(); 
+        _inputSystem.Device.RightMouseInteraction.performed += _ => OnDeviceRightMouseInteraction?.Invoke(); 
     }
 }
 
