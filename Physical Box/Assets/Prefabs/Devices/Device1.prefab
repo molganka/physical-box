@@ -85,3 +85,7 @@ MonoBehaviour:
   _swayAmount: 0.2
   _swayAmountRange: 0.5
   _smoothAmount: 10
+  _minObjectDistance: 1
+  _maxObjectDistance: 4
+  _scrollDistanceAmount: 0.15
+  _changingDistanceSpeed: 5

@@ -448,6 +448,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseScroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""df11ff54-2a8e-4443-862d-939d07c82a90"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -470,6 +479,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""RightMouseInteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c763923f-7eba-4a4c-bd35-36919d95d11d"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseScroll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -501,6 +521,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Device = asset.FindActionMap("Device", throwIfNotFound: true);
         m_Device_LeftMouseInteraction = m_Device.FindAction("LeftMouseInteraction", throwIfNotFound: true);
         m_Device_RightMouseInteraction = m_Device.FindAction("RightMouseInteraction", throwIfNotFound: true);
+        m_Device_MouseScroll = m_Device.FindAction("MouseScroll", throwIfNotFound: true);
     }
 
     ~@GameInput()
@@ -767,12 +788,14 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private List<IDeviceActions> m_DeviceActionsCallbackInterfaces = new List<IDeviceActions>();
     private readonly InputAction m_Device_LeftMouseInteraction;
     private readonly InputAction m_Device_RightMouseInteraction;
+    private readonly InputAction m_Device_MouseScroll;
     public struct DeviceActions
     {
         private @GameInput m_Wrapper;
         public DeviceActions(@GameInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @LeftMouseInteraction => m_Wrapper.m_Device_LeftMouseInteraction;
         public InputAction @RightMouseInteraction => m_Wrapper.m_Device_RightMouseInteraction;
+        public InputAction @MouseScroll => m_Wrapper.m_Device_MouseScroll;
         public InputActionMap Get() { return m_Wrapper.m_Device; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -788,6 +811,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @RightMouseInteraction.started += instance.OnRightMouseInteraction;
             @RightMouseInteraction.performed += instance.OnRightMouseInteraction;
             @RightMouseInteraction.canceled += instance.OnRightMouseInteraction;
+            @MouseScroll.started += instance.OnMouseScroll;
+            @MouseScroll.performed += instance.OnMouseScroll;
+            @MouseScroll.canceled += instance.OnMouseScroll;
         }
 
         private void UnregisterCallbacks(IDeviceActions instance)
@@ -798,6 +824,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @RightMouseInteraction.started -= instance.OnRightMouseInteraction;
             @RightMouseInteraction.performed -= instance.OnRightMouseInteraction;
             @RightMouseInteraction.canceled -= instance.OnRightMouseInteraction;
+            @MouseScroll.started -= instance.OnMouseScroll;
+            @MouseScroll.performed -= instance.OnMouseScroll;
+            @MouseScroll.canceled -= instance.OnMouseScroll;
         }
 
         public void RemoveCallbacks(IDeviceActions instance)
@@ -840,5 +869,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     {
         void OnLeftMouseInteraction(InputAction.CallbackContext context);
         void OnRightMouseInteraction(InputAction.CallbackContext context);
+        void OnMouseScroll(InputAction.CallbackContext context);
     }
 }

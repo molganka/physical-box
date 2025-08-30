@@ -38,6 +38,13 @@ public abstract class BaseDevice : MonoBehaviour
             _smoothAmount * Time.deltaTime);
     }
 
+    public Vector3 GetForwardPosition(float distance)
+    {
+        return PlayerController.Instance.transform.position +
+                PlayerController.Instance.transform.forward +
+                PlayerCameraController.Instance.transform.forward * distance;
+    }
+
     public virtual void Show()
     {
         _meshRenderer.enabled = true;

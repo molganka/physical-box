@@ -14,6 +14,7 @@ public class InputManager : MonoBehaviour
 
     public event Action OnPlayerCrouchInput;
     public event Action<int> OnPlayerDeviceChanged;
+    public event Action<sbyte> OnDeviceMouseScrolled;
     public event Action OnDeviceLeftMouseInteraction;
     public event Action OnDeviceRightMouseInteraction;
 
@@ -61,6 +62,8 @@ public class InputManager : MonoBehaviour
         _inputSystem.Player.ChangeDeviceTo6.performed += _ => OnPlayerDeviceChanged?.Invoke(6);
         _inputSystem.Player.ChangeDeviceTo7.performed += _ => OnPlayerDeviceChanged?.Invoke(7);
         _inputSystem.Player.ChangeDeviceTo8.performed += _ => OnPlayerDeviceChanged?.Invoke(8);
+
+        _inputSystem.Device.MouseScroll.performed += _ => OnDeviceMouseScrolled?.Invoke((sbyte)_.ReadValue<Vector2>().y);
 
         _inputSystem.Device.LeftMouseInteraction.performed += _ => OnDeviceLeftMouseInteraction?.Invoke(); 
         _inputSystem.Device.RightMouseInteraction.performed += _ => OnDeviceRightMouseInteraction?.Invoke(); 
