@@ -1,4 +1,5 @@
 using DG.Tweening;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class PlayerCameraController : MonoBehaviour
@@ -17,16 +18,15 @@ public class PlayerCameraController : MonoBehaviour
 
     private Camera _camera;
 
-    public Transform CameraTransform { get; private set; }
+    //public Transform CameraTransform { get; private set; }
 
     private void Awake()
     {
         if(Instance == null)
             Instance = this;
 
-        _camera = GetComponentInChildren<Camera>();
+        _camera = GetComponent<Camera>();
         _targetLocalPosition = transform.localPosition;
-        CameraTransform = transform.GetChild(0);
     }
 
     private void LateUpdate()
@@ -41,7 +41,7 @@ public class PlayerCameraController : MonoBehaviour
 
     public void ChangeRotation(Quaternion rotation)
     {
-        CameraTransform.localRotation = rotation;
+        transform.localRotation = rotation;
     }
 
     public void SetHighFOV()
