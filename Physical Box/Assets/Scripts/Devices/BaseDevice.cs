@@ -38,12 +38,12 @@ public abstract class BaseDevice : MonoBehaviour
             _smoothAmount * Time.deltaTime);
     }
 
-    public void Show()
+    public virtual void Show()
     {
         _meshRenderer.enabled = true;
     }
 
-    public void Hide()
+    public virtual void Hide()
     {
         _meshRenderer.enabled = false;
     }

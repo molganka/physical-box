@@ -4,8 +4,8 @@ public class ItemsManager : MonoBehaviour
 {
     public static ItemsManager Instance;
 
-    [SerializeField] private GameObject _cube;
-    public GameObject CurrentObject { get; private set; }
+    [SerializeField] private Object _cube;
+    public Object CurrentObject { get; private set; }
 
     private void Awake()
     {

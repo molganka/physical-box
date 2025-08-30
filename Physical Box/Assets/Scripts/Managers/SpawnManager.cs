@@ -10,8 +10,8 @@ public class SpawnManager : MonoBehaviour
             Instance = this;
     }
 
-    public void SpawnObject(GameObject obj, Vector3 pos, Quaternion rotation)
+    public Object SpawnObject(Object obj, Vector3 pos, Quaternion rotation)
     {
-        Instantiate(obj, pos, rotation);
+        return Instantiate(obj.gameObject, pos, rotation).GetComponent<Object>();
     }
 }

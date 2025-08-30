@@ -13,7 +13,7 @@ public class InputManager : MonoBehaviour
     public bool PlayerIsJumpInput { get; private set; }
 
     public event Action OnPlayerCrouchInput;
-    public event Action<float> OnPlayerScrollDeviceInput;
+    public event Action<int> OnPlayerDeviceChanged;
     public event Action OnDeviceLeftMouseInteraction;
     public event Action OnDeviceRightMouseInteraction;
 
@@ -45,8 +45,6 @@ public class InputManager : MonoBehaviour
         _inputSystem.Player.Look.performed += ctx => PlayerLookInput = ctx.ReadValue<Vector2>();
         _inputSystem.Player.Look.canceled += _ => PlayerLookInput = Vector2.zero;
 
-        _inputSystem.Player.ScrollDevice.performed += ctx => OnPlayerScrollDeviceInput?.Invoke(ctx.ReadValue<Vector2>().y);
-
         _inputSystem.Player.Run.performed += _ => PlayerIsRunInput = true;
         _inputSystem.Player.Run.canceled += _ => PlayerIsRunInput = false;
 
@@ -54,6 +52,15 @@ public class InputManager : MonoBehaviour
         _inputSystem.Player.Jump.canceled += _ => PlayerIsJumpInput = false;
 
         _inputSystem.Player.Crouch.performed += _ => OnPlayerCrouchInput?.Invoke();
+
+        _inputSystem.Player.ChangeDeviceTo1.performed += _ => OnPlayerDeviceChanged?.Invoke(1);
+        _inputSystem.Player.ChangeDeviceTo2.performed += _ => OnPlayerDeviceChanged?.Invoke(2);
+        _inputSystem.Player.ChangeDeviceTo3.performed += _ => OnPlayerDeviceChanged?.Invoke(3);
+        _inputSystem.Player.ChangeDeviceTo4.performed += _ => OnPlayerDeviceChanged?.Invoke(4);
+        _inputSystem.Player.ChangeDeviceTo5.performed += _ => OnPlayerDeviceChanged?.Invoke(5);
+        _inputSystem.Player.ChangeDeviceTo6.performed += _ => OnPlayerDeviceChanged?.Invoke(6);
+        _inputSystem.Player.ChangeDeviceTo7.performed += _ => OnPlayerDeviceChanged?.Invoke(7);
+        _inputSystem.Player.ChangeDeviceTo8.performed += _ => OnPlayerDeviceChanged?.Invoke(8);
 
         _inputSystem.Device.LeftMouseInteraction.performed += _ => OnDeviceLeftMouseInteraction?.Invoke(); 
         _inputSystem.Device.RightMouseInteraction.performed += _ => OnDeviceRightMouseInteraction?.Invoke(); 

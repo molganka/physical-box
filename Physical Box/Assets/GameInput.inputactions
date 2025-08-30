@@ -58,6 +58,78 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ChangeDeviceTo1",
+                    "type": "Button",
+                    "id": "1242d665-bc30-44cf-844b-33122a81d794",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeDeviceTo2",
+                    "type": "Button",
+                    "id": "53c7f08a-2548-4d6e-a994-051e3704ba79",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeDeviceTo3",
+                    "type": "Button",
+                    "id": "c9b498c5-665b-4b41-a9ab-19c80feb3364",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeDeviceTo4",
+                    "type": "Button",
+                    "id": "1d25732f-57a6-460d-ab89-2499fdbe974a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeDeviceTo5",
+                    "type": "Button",
+                    "id": "4372670b-6c92-4ac1-bbe1-f4ff84ec9324",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeDeviceTo6",
+                    "type": "Button",
+                    "id": "f0b278c3-d191-4b75-981e-db096044472c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeDeviceTo7",
+                    "type": "Button",
+                    "id": "e29a7d4a-f6d3-4cf0-97af-91c4b6eb41d6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeDeviceTo8",
+                    "type": "Button",
+                    "id": "8ee4c76b-79a8-4dac-be6e-b6c45cd8c483",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -212,6 +284,94 @@
                     "processors": "",
                     "groups": "",
                     "action": "ScrollDevice",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "350ec0c2-74c7-4671-a7d3-8c3ff2f2e259",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeDeviceTo1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c4b4afa-4fd1-4418-9636-e7126c5764ac",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeDeviceTo2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d165041b-9240-4a73-bcf3-e8d961d0cf0b",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeDeviceTo3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "030f6bb9-9158-4a2e-8290-a0030e093286",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeDeviceTo4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bdfa5252-8990-40e9-9ea4-b4f9e3324529",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeDeviceTo5",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3ae4ee5c-d889-40dd-b3cd-cb270d624f6c",
+                    "path": "<Keyboard>/6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeDeviceTo6",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0a4d300f-e0e4-4647-bd4f-b1b181141b4a",
+                    "path": "<Keyboard>/7",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeDeviceTo7",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3d784c29-f208-4fd2-85b4-653aa690a725",
+                    "path": "<Keyboard>/8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeDeviceTo8",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

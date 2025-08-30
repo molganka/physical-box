@@ -4,16 +4,15 @@ public class DeviceManager : MonoBehaviour
 {
     [SerializeField] private BaseDevice[] _devices;
     private int _currentDeviceIndex;
-    private int _mouseScrollCountToChange;
 
     private void OnEnable()
     {
-        InputManager.Instance.OnPlayerScrollDeviceInput += ProcessScrollDevice;
+        InputManager.Instance.OnPlayerDeviceChanged += ProcessChangeDevice;
     }
 
     private void OnDisable()
     {
-        InputManager.Instance.OnPlayerScrollDeviceInput -= ProcessScrollDevice;
+        InputManager.Instance.OnPlayerDeviceChanged -= ProcessChangeDevice;
     }
 
     private void Awake()
@@ -46,35 +45,19 @@ public class DeviceManager : MonoBehaviour
         }
     }
 
-    private void ProcessScrollDevice(float scrollDirection)
+    private void ProcessChangeDevice(int input)
     {
-        Debug.Log(scrollDirection);
-        if (scrollDirection > 0)
+        Debug.Log(input);
+        --input;
+        if(input >= 0 && input < _devices.Length)
         {
-            if (_mouseScrollCountToChange == 1)
-            {
-                ChangeToNextDevice();
-                _mouseScrollCountToChange = 0;
-            }
-            else
-            {
-                _mouseScrollCountToChange = 1;
-            }
-        }
-        else
-        {
-            if(_mouseScrollCountToChange == -1)
-            {
-                ChangeToPreviousDevice();
-                _mouseScrollCountToChange = 0;
-            }
-            else
-            {
-                _mouseScrollCountToChange = -1;
-            }
+            _devices[_currentDeviceIndex]?.Hide();
+            _devices[input].Show();
         }
     }
 
+
+/*
     private void ChangeToNextDevice()
     {
         _devices[_currentDeviceIndex]?.Hide();
@@ -105,5 +88,5 @@ public class DeviceManager : MonoBehaviour
             _devices[_devices.Length - 1].Show();
             _currentDeviceIndex = _devices.Length-1;
         }
-    }
+    }*/
 }

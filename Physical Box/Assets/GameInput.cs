@@ -80,6 +80,78 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ChangeDeviceTo1"",
+                    ""type"": ""Button"",
+                    ""id"": ""1242d665-bc30-44cf-844b-33122a81d794"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeDeviceTo2"",
+                    ""type"": ""Button"",
+                    ""id"": ""53c7f08a-2548-4d6e-a994-051e3704ba79"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeDeviceTo3"",
+                    ""type"": ""Button"",
+                    ""id"": ""c9b498c5-665b-4b41-a9ab-19c80feb3364"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeDeviceTo4"",
+                    ""type"": ""Button"",
+                    ""id"": ""1d25732f-57a6-460d-ab89-2499fdbe974a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeDeviceTo5"",
+                    ""type"": ""Button"",
+                    ""id"": ""4372670b-6c92-4ac1-bbe1-f4ff84ec9324"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeDeviceTo6"",
+                    ""type"": ""Button"",
+                    ""id"": ""f0b278c3-d191-4b75-981e-db096044472c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeDeviceTo7"",
+                    ""type"": ""Button"",
+                    ""id"": ""e29a7d4a-f6d3-4cf0-97af-91c4b6eb41d6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeDeviceTo8"",
+                    ""type"": ""Button"",
+                    ""id"": ""8ee4c76b-79a8-4dac-be6e-b6c45cd8c483"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -236,6 +308,94 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""ScrollDevice"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""350ec0c2-74c7-4671-a7d3-8c3ff2f2e259"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeDeviceTo1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c4b4afa-4fd1-4418-9636-e7126c5764ac"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeDeviceTo2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d165041b-9240-4a73-bcf3-e8d961d0cf0b"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeDeviceTo3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""030f6bb9-9158-4a2e-8290-a0030e093286"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeDeviceTo4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bdfa5252-8990-40e9-9ea4-b4f9e3324529"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeDeviceTo5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ae4ee5c-d889-40dd-b3cd-cb270d624f6c"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeDeviceTo6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0a4d300f-e0e4-4647-bd4f-b1b181141b4a"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeDeviceTo7"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d784c29-f208-4fd2-85b4-653aa690a725"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeDeviceTo8"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -326,6 +486,14 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_ScrollDevice = m_Player.FindAction("ScrollDevice", throwIfNotFound: true);
+        m_Player_ChangeDeviceTo1 = m_Player.FindAction("ChangeDeviceTo1", throwIfNotFound: true);
+        m_Player_ChangeDeviceTo2 = m_Player.FindAction("ChangeDeviceTo2", throwIfNotFound: true);
+        m_Player_ChangeDeviceTo3 = m_Player.FindAction("ChangeDeviceTo3", throwIfNotFound: true);
+        m_Player_ChangeDeviceTo4 = m_Player.FindAction("ChangeDeviceTo4", throwIfNotFound: true);
+        m_Player_ChangeDeviceTo5 = m_Player.FindAction("ChangeDeviceTo5", throwIfNotFound: true);
+        m_Player_ChangeDeviceTo6 = m_Player.FindAction("ChangeDeviceTo6", throwIfNotFound: true);
+        m_Player_ChangeDeviceTo7 = m_Player.FindAction("ChangeDeviceTo7", throwIfNotFound: true);
+        m_Player_ChangeDeviceTo8 = m_Player.FindAction("ChangeDeviceTo8", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
@@ -407,6 +575,14 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_ScrollDevice;
+    private readonly InputAction m_Player_ChangeDeviceTo1;
+    private readonly InputAction m_Player_ChangeDeviceTo2;
+    private readonly InputAction m_Player_ChangeDeviceTo3;
+    private readonly InputAction m_Player_ChangeDeviceTo4;
+    private readonly InputAction m_Player_ChangeDeviceTo5;
+    private readonly InputAction m_Player_ChangeDeviceTo6;
+    private readonly InputAction m_Player_ChangeDeviceTo7;
+    private readonly InputAction m_Player_ChangeDeviceTo8;
     public struct PlayerActions
     {
         private @GameInput m_Wrapper;
@@ -417,6 +593,14 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @ScrollDevice => m_Wrapper.m_Player_ScrollDevice;
+        public InputAction @ChangeDeviceTo1 => m_Wrapper.m_Player_ChangeDeviceTo1;
+        public InputAction @ChangeDeviceTo2 => m_Wrapper.m_Player_ChangeDeviceTo2;
+        public InputAction @ChangeDeviceTo3 => m_Wrapper.m_Player_ChangeDeviceTo3;
+        public InputAction @ChangeDeviceTo4 => m_Wrapper.m_Player_ChangeDeviceTo4;
+        public InputAction @ChangeDeviceTo5 => m_Wrapper.m_Player_ChangeDeviceTo5;
+        public InputAction @ChangeDeviceTo6 => m_Wrapper.m_Player_ChangeDeviceTo6;
+        public InputAction @ChangeDeviceTo7 => m_Wrapper.m_Player_ChangeDeviceTo7;
+        public InputAction @ChangeDeviceTo8 => m_Wrapper.m_Player_ChangeDeviceTo8;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -444,6 +628,30 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @ScrollDevice.started += instance.OnScrollDevice;
             @ScrollDevice.performed += instance.OnScrollDevice;
             @ScrollDevice.canceled += instance.OnScrollDevice;
+            @ChangeDeviceTo1.started += instance.OnChangeDeviceTo1;
+            @ChangeDeviceTo1.performed += instance.OnChangeDeviceTo1;
+            @ChangeDeviceTo1.canceled += instance.OnChangeDeviceTo1;
+            @ChangeDeviceTo2.started += instance.OnChangeDeviceTo2;
+            @ChangeDeviceTo2.performed += instance.OnChangeDeviceTo2;
+            @ChangeDeviceTo2.canceled += instance.OnChangeDeviceTo2;
+            @ChangeDeviceTo3.started += instance.OnChangeDeviceTo3;
+            @ChangeDeviceTo3.performed += instance.OnChangeDeviceTo3;
+            @ChangeDeviceTo3.canceled += instance.OnChangeDeviceTo3;
+            @ChangeDeviceTo4.started += instance.OnChangeDeviceTo4;
+            @ChangeDeviceTo4.performed += instance.OnChangeDeviceTo4;
+            @ChangeDeviceTo4.canceled += instance.OnChangeDeviceTo4;
+            @ChangeDeviceTo5.started += instance.OnChangeDeviceTo5;
+            @ChangeDeviceTo5.performed += instance.OnChangeDeviceTo5;
+            @ChangeDeviceTo5.canceled += instance.OnChangeDeviceTo5;
+            @ChangeDeviceTo6.started += instance.OnChangeDeviceTo6;
+            @ChangeDeviceTo6.performed += instance.OnChangeDeviceTo6;
+            @ChangeDeviceTo6.canceled += instance.OnChangeDeviceTo6;
+            @ChangeDeviceTo7.started += instance.OnChangeDeviceTo7;
+            @ChangeDeviceTo7.performed += instance.OnChangeDeviceTo7;
+            @ChangeDeviceTo7.canceled += instance.OnChangeDeviceTo7;
+            @ChangeDeviceTo8.started += instance.OnChangeDeviceTo8;
+            @ChangeDeviceTo8.performed += instance.OnChangeDeviceTo8;
+            @ChangeDeviceTo8.canceled += instance.OnChangeDeviceTo8;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -466,6 +674,30 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @ScrollDevice.started -= instance.OnScrollDevice;
             @ScrollDevice.performed -= instance.OnScrollDevice;
             @ScrollDevice.canceled -= instance.OnScrollDevice;
+            @ChangeDeviceTo1.started -= instance.OnChangeDeviceTo1;
+            @ChangeDeviceTo1.performed -= instance.OnChangeDeviceTo1;
+            @ChangeDeviceTo1.canceled -= instance.OnChangeDeviceTo1;
+            @ChangeDeviceTo2.started -= instance.OnChangeDeviceTo2;
+            @ChangeDeviceTo2.performed -= instance.OnChangeDeviceTo2;
+            @ChangeDeviceTo2.canceled -= instance.OnChangeDeviceTo2;
+            @ChangeDeviceTo3.started -= instance.OnChangeDeviceTo3;
+            @ChangeDeviceTo3.performed -= instance.OnChangeDeviceTo3;
+            @ChangeDeviceTo3.canceled -= instance.OnChangeDeviceTo3;
+            @ChangeDeviceTo4.started -= instance.OnChangeDeviceTo4;
+            @ChangeDeviceTo4.performed -= instance.OnChangeDeviceTo4;
+            @ChangeDeviceTo4.canceled -= instance.OnChangeDeviceTo4;
+            @ChangeDeviceTo5.started -= instance.OnChangeDeviceTo5;
+            @ChangeDeviceTo5.performed -= instance.OnChangeDeviceTo5;
+            @ChangeDeviceTo5.canceled -= instance.OnChangeDeviceTo5;
+            @ChangeDeviceTo6.started -= instance.OnChangeDeviceTo6;
+            @ChangeDeviceTo6.performed -= instance.OnChangeDeviceTo6;
+            @ChangeDeviceTo6.canceled -= instance.OnChangeDeviceTo6;
+            @ChangeDeviceTo7.started -= instance.OnChangeDeviceTo7;
+            @ChangeDeviceTo7.performed -= instance.OnChangeDeviceTo7;
+            @ChangeDeviceTo7.canceled -= instance.OnChangeDeviceTo7;
+            @ChangeDeviceTo8.started -= instance.OnChangeDeviceTo8;
+            @ChangeDeviceTo8.performed -= instance.OnChangeDeviceTo8;
+            @ChangeDeviceTo8.canceled -= instance.OnChangeDeviceTo8;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -591,6 +823,14 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnScrollDevice(InputAction.CallbackContext context);
+        void OnChangeDeviceTo1(InputAction.CallbackContext context);
+        void OnChangeDeviceTo2(InputAction.CallbackContext context);
+        void OnChangeDeviceTo3(InputAction.CallbackContext context);
+        void OnChangeDeviceTo4(InputAction.CallbackContext context);
+        void OnChangeDeviceTo5(InputAction.CallbackContext context);
+        void OnChangeDeviceTo6(InputAction.CallbackContext context);
+        void OnChangeDeviceTo7(InputAction.CallbackContext context);
+        void OnChangeDeviceTo8(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
